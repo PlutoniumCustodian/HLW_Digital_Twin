@@ -1,0 +1,4 @@
+﻿Ultra sonic (UT) monitoring input,,,,
+tempurateru of the steel canister wall in °C,trip time in seconds for most recent UT mesurment,trip time in seconds for another UT measurement,time between UT measurements in years,the difference in time between most recent UT measurement and radionuclide inventory in years.
+T,t_eco1,t_eco2,delta_t_eco,t_past
+25,1.654001E-05,1.654338E-05,1.001,100.001

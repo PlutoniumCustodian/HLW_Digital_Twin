@@ -1,0 +1,112 @@
+TITLE
+Americium uptake by high Al alkali-activated material
+END
+
+RUNTIME
+time_units         year
+timestep_max       .25
+timestep_init      1.E-10
+time_tolerance     0.05
+hindmarsh          true
+correction_max     2
+solver             bicg
+pc                 ilu
+pclevel            2
+master_variable    H+
+database           database_w_AAMv4.dbs
+gimrt              true
+debye-huckel       true
+screen_output      10
+END
+
+OUTPUT
+time_units           year
+spatial_profile      25000 50000 55000 
+!time_series       time_series1.out   1 1 1
+!time_series       time_series10.out   10 1 1
+time_series       time_series35.out 35 1 1
+time_series_print
+END
+
+BOUNDARY_CONDITIONS
+x_begin   inlet     flux
+x_end     AAM_zone  flux
+END
+
+INITIAL_CONDITIONS
+AAM_zone    1-100 1-1 1-1
+END
+
+DISCRETIZATION
+distance_units   centimeters
+xzones           100  0.35
+!simulation is 35 cells each 1cm long
+END
+
+TRANSPORT
+distance_units   centimeters
+time_units       seconds
+fix_diffusion         5.8E-6
+constant_tortuosity   0.7
+END
+
+FLOW
+distance_units     meters
+time_units         year
+calculate_flow     false
+constant_flow      PythonValue2
+END
+
+PRIMARY_SPECIES
+H+
+Am+++
+Cl-
+Tracer
+END
+
+SECONDARY_SPECIES
+OH-
+Am(OH)2+
+Am(OH)3(aq)
+AmCl++
+AmOH++
+END
+
+GASES
+END
+
+MINERALS  
+AAM
+END
+
+SURFACE_COMPLEXATION
+END
+
+ION_EXCHANGE
+exchange   Xaam-
+convention Gaines-Thomas
+END
+
+Condition        inlet 
+units            mol/kg 
+temperature      25.0
+pH               6.2
+Am+++            PythonValue1
+Cl-              charge
+Tracer           1.1E-8
+Xaam-   -cec     5.10E-03    
+AAM              0.0     specific_surface_area  11.5402
+Equilibrate_surface 
+END
+
+Condition        AAM_zone 
+units            mol/kg 
+temperature      25.0
+pH               6.2
+Am+++            0.0
+Tracer           0.0
+Cl-              charge
+Xaam-   -cec     9.7E-05    
+AAM              0.78     specific_surface_area  11.5402
+Equilibrate_surface 
+END

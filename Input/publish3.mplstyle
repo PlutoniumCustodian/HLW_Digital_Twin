@@ -1,0 +1,11 @@
+figure.figsize:     3.5, 3.5
+font.sans-serif: IBM Plex Sans
+font.style:   normal
+axes.titlesize : 12
+axes.labelsize : 12
+lines.linewidth : 1.5
+lines.markersize : 5
+lines.markeredgewidth: 2.0
+xtick.labelsize : 10
+ytick.labelsize : 10
+markers.fillstyle: full

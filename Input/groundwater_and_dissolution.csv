@@ -1,0 +1,4 @@
+﻿Assumption about ground water flow and Am disolution,,,
+minimum canister thickness needed to maintain canister integrity (in meters),ground water flow rate through damaged canister (in L/min),crosectional area of water leaving damaged canister (in m^2),Am disolution rate (in fraction of inventory per day)
+D_min,gw_flow,rupture_area,leach_fraction
+0.01,1.00E-02,0.5,3.00E-07
