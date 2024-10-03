@@ -96,21 +96,21 @@ fig.savefig('Output/Am_decay_chain_profiles.svg', transparent=False, bbox_inches
 yr_t_sec = 60 * 60 *24 *365 #seconds in a year
 plt.style.use('Input/publish3.mplstyle')
 fig, ax = plt.subplots(figsize=(5,5)) #size is in inches
-ax.plot(N_t["Time (yr)"], N_t['Am-243'] * lamda[3] * yr_t_sec, label='Am-243')
-# ax.plot(N_t["Time (yr)"], N_t['Cm-245'] * lamda[0] * yr_t_sec, label='Cm-245')
-# ax.plot(N_t["Time (yr)"], N_t['Pu-241'] * lamda[1] * yr_t_sec, label='Pu-241')
-ax.plot(N_t["Time (yr)"], N_t['Am-241'] * lamda[2] * yr_t_sec, label='Am-241')
-ax.plot(N_t["Time (yr)"], N_t['Am-241'] * lamda[2] * yr_t_sec \
-        + N_t['Am-243'] * lamda[3] * yr_t_sec, label='Total Am', color='grey')
+ax.plot(N_t["Time (yr)"], N_t['Am-243'] * lamda[3] / yr_t_sec, label='Am-243')
+# ax.plot(N_t["Time (yr)"], N_t['Cm-245'] * lamda[0] / yr_t_sec, label='Cm-245')
+# ax.plot(N_t["Time (yr)"], N_t['Pu-241'] * lamda[1] / yr_t_sec, label='Pu-241')
+ax.plot(N_t["Time (yr)"], N_t['Am-241'] * lamda[2] / yr_t_sec, label='Am-241')
+ax.plot(N_t["Time (yr)"], N_t['Am-241'] * lamda[2] / yr_t_sec \
+        + N_t['Am-243'] * lamda[3] / yr_t_sec, label='Total Am', color='grey')
 ax.plot(N_fail.loc[2:3,"Time (yr)"], np.multiply(N_fail.loc[2:3,'moles'], [lamda[2],\
-        lamda[3]]) * yr_t_sec, ls='', marker='x', color ='k' ,label='canister fail')
+        lamda[3]]) / yr_t_sec, ls='', marker='x', color ='k' ,label='canister fail')
 
 ax.set_xlabel("time (years)") #, fontsize=9)
 ax.set_ylabel("activity per cannister (Becquerel)") #, fontsize=9)
-ax.set_yscale('log')
-ax.set_xscale('log')
+# ax.set_yscale('log')
+# ax.set_xscale('log')
 ax.legend()
-fig.savefig('Output/Am_activity_profile.svg', transparent=False, bbox_inches="tight")
+# fig.savefig('Output/Am_activity_profile.svg', transparent=False, bbox_inches="tight")
 
 #%% function to round Round a number to a specified number of significant figures 
 def round_to_sigfigs(x, sigfigs):
@@ -131,7 +131,7 @@ Darcy_flux = flow_rate * 0.001 / assume.loc[0,'rupture_area'] * 525960 # darcy f
 text1 = f'The utilized ultrasonic evaluation of canister thickness was conducted {UT_df.loc[0,'t_past']} years after radionuclide inventory.\n \
 HLW canister thickness remaining is {round((D*100),3)} cm.\n\
 The current canister corrosion rate is {round(CorRate / 1e-6, 3)} μm/year.\n\
-The canister is predicted to fail in {round((D/CorRate),1)} years ({round(t_fail, 1)} years after nuclide inventory).\n \n\
+The canister is predicted to fail in {round((t_fail - UT_df.loc[0,'t_past']),1)} years ({round(t_fail, 1)} years after nuclide inventory).\n \n\
 Tracked isotopes inventory at the time of predicted canister failure' 
 
 text2 = f'Assuming Am fractional release rate of {leach_fraction} per day,\
